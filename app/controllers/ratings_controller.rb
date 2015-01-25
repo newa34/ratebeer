@@ -9,9 +9,14 @@ class RatingsController <ApplicationController
  end
 
  def create
-raise
    Rating.create params.require(:rating).permit(:score, :beer_id)
    @ratings = Rating.all
    render :index
+ end
+
+ def destroy
+  rating = Rating.find(params[:id])
+  rating.delete
+  redirect_to ratings_path
  end
 end
