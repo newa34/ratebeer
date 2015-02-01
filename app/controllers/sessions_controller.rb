@@ -5,14 +5,15 @@ class SessionsController <ApplicationController
 
 	def create
 		#username for the database
-		user = User .find_by username: params[:username]
-
-		#deposite with the session id of the logged in user (if exists)
-		session[ :user_id] = user.id if not user.nil?
+		user = User.find_by username: params[:username]
+		if user.nil?
+			redirect_to :back, notice: "User #{params[:username]} does not exists!"
+		else
+		#deposit with the session id of the logged in user (if exists)
+		session[ :user_id] = user.id
 		#will redicted a user on separate page
-
-		redirect_to user
-
+		redirect_to user, notice: "Welcome"
+		end
 	end
 
 	def destroy
