@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   resources :users
 
   get 'signup', to: 'users#new'
-  get 'signin', to: 'sessions#new'
   get 'signout', to: 'sessions#destroy'
+  get 'signin', to: 'sessions#new'
 
   resources :beers
   resources :breweries

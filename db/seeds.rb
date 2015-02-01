@@ -16,3 +16,6 @@ b2.beers.create name:"Huvila Pale Ale", style:"Pale Ale"
 b2.beers.create name:"X Porter", style:"Porter"
 b3.beers.create name:"Hefezeizen", style:"Weizen"
 b3.beers.create name:"Helles", style:"Lager"
+
+BeerClub.create name:"Diamond",founded:"2001",city:"Helsinki"
+BeerClub.create name:"Brygger",founded:"1991",city:"Helsinki"
