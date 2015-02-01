@@ -1,16 +1,25 @@
 Rails.application.routes.draw do
+  resources :users
+
+  get 'signup', to: 'users#new'
+  get 'signin', to: 'sessions#new'
+  get 'signout', to: 'sessions#destroy'
+
   resources :beers
   resources :breweries
 
-#breweries to default home  page
+ # Breweries to default home  page
   root 'breweries#index'
- # get 'ratings', to: 'ratings#index'
-
-#Rating form
-#  get 'ratings/new', to: 'ratings#new'
-#  post 'ratings', to: 'ratings#create'
+ 
+ # Rating form
+ #  get 'ratings/new', to: 'ratings#new'
+ #  post 'ratings', to: 'ratings#create'
 
   resources :ratings, only: [:index, :new, :create, :destroy]
+ 
+  #session 
+  resource :session, only: [:new, :create, :delete]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -65,4 +74,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
 end
