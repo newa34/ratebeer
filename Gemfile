@@ -43,6 +43,9 @@ group :development, :test do
 #Added after error message while starting rails server
   gem 'rb-readline'
   gem 'sqlite3'
+
+#RSpec for testing
+  gem 'rspec-rails', '~>3.0'
 end
 
 group :production do
@@ -51,3 +54,9 @@ group :production do
 end
 
 ruby '2.2.0'
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
+end
