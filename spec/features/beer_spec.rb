@@ -20,7 +20,7 @@ describe "Beer" do
   	fill_in('beer[name]', with:'')
   	click_button('Create Beer')
 
-	expect(page).to have_content("Cannot be blank")
+	expect(page).to have_content("Name can't be blank")
 	expect(Beer.count).to eq(0)
   end
 

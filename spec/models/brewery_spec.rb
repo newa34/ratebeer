@@ -6,13 +6,12 @@ describe Brewery do
 
     expect(brewery.name).to eq("Schlenkerla")
     expect(brewery.year).to eq(1674)
-  	expect(brewery).to be_valid
+    expect(brewery).to be_valid
   end
 
   it "without a name is not valid" do
-  	brewery = Brewery.create year:1674
+    brewery = Brewery.create year:1674
 
-  	expect(brewery).not_to be_valid
+    expect(brewery).not_to be_valid
   end
-
 end

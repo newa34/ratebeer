@@ -44,7 +44,7 @@ describe "Rating" do
     expect(page).to have_content('iso 3')
     expect(Rating.count).to eq(1)
     expect{
-    click_button('Delete')
+    click_link('delete')
     }.to change{Rating.count}.from(1).to(0)
   end
 end

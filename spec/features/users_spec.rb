@@ -10,7 +10,7 @@ describe "User" do
     it "can signin with right credentials" do
       sign_in(username:"Pekka", password:"Foobar1")
 
-      expect(page).to have_content 'Welcome back!'
+      expect(page).to have_content 'Welcome'
       expect(page).to have_content 'Pekka'
     end
 
@@ -40,12 +40,12 @@ describe "User" do
       user2 = User.last
 
       visit user_path(user1)
-      expect(page).to have_content('Has made 2 ratings')
+      expect(page).to have_content('has made 2 ratings')
       expect(page).to have_content('iso 3')
       expect(page).to have_content('Karhu')
 
       visit user_path(user2)
-      expect(page).to have_content('Has made 1 rating')
+      expect(page).to have_content('has made 1 rating')
       expect(page).to have_content('lappari')
     end
 
@@ -87,5 +87,4 @@ end
 BeerClub
 BeerClubsController
 
-Memberships
 MembershipsController

@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <h2><%= @user.username %></h2>
+<h2>Username: <%= @user.username %></h2>
 </p>
 
 <!-- List membership -->
@@ -38,6 +38,16 @@
 	<% end %>
 </p>	
 
+<p>
+	<strong>Favorite style: </strong>
+	<%= @user.favorite_style %>
+</p>
+
+<p>
+	<strong>Favorite brewery: </strong>
+	
+	<%= link_to @user.favorite_brewery.name, @user.favorite_brewery %>
+</p>
 
 <% if @user == current_user %>
 	<td><%= link_to 'Edit', edit_user_path(@user) %></td>
