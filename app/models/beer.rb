@@ -13,9 +13,9 @@ class Beer < ActiveRecord::Base
    end
 
   def average
-	if ratings.count == 0 
-	   return 0
-	end
-	ratings.map { |b| b.score}.sum / ratings.count.to_f
+  	if ratings.count == 0 
+  	   return 0
+  	end
+  	ratings.map { |b| b.score}.sum / ratings.count.to_f
   end
 end

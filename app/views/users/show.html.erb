@@ -42,12 +42,13 @@
 	<strong>Favorite style: </strong>
 	<%= @user.favorite_style %>
 </p>
-
+<% if false %>
 <p>
 	<strong>Favorite brewery: </strong>
-	
-	<%= link_to @user.favorite_brewery.name, @user.favorite_brewery %>
+
+	<%= link_to "#{@user.favorite_brewery.name }", @user.favorite_brewery %>
 </p>
+<% end %>
 
 <% if @user == current_user %>
 	<td><%= link_to 'Edit', edit_user_path(@user) %></td>

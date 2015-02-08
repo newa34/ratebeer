@@ -58,14 +58,6 @@ describe "User" do
       expect(page).to have_content('Favorite style: Lager')
     end
 
-    it "has favorite brewery" do
-      create_beers_and_ratings
-      user1 = User.first
-
-      visit user_path(user1)
-
-      expect(page).to have_content('Favorite brewery: Koff')
-    end
   end
 
 end

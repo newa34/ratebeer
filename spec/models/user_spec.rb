@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+describe "User" do
   it "has the username set correctly" do
     user = User.new username:"Pekka"
 
@@ -91,52 +91,8 @@ RSpec.describe User, type: :model do
 
       expect(user.favorite_style).to eq('IPA')
     end
-  end
-
-  describe "favorite_brewery" do
-    let(:user){FactoryGirl.create(:user) }
-
-    it "has method for determining one" do
-      expect(user).to respond_to :favorite_brewery
-    end
-
-    it "without ratings does not have one" do
-      expect(user.favorite_brewery).to eq(nil)
-    end
-
-    it "is the brewery if only one beer rated from it" do
-      brewery = FactoryGirl.create(:brewery, name:"koff")
-      beer = create_beer_with_rating_and_brewery(20, user, brewery)
-
-      expect(user.favorite_brewery).to eq(beer.brewery)
-    end
-
-    it "is the brewery if has the best average rating for it's beers" do
-      b1 = FactoryGirl.create(:brewery, name:"koff")
-      b2 = FactoryGirl.create(:brewery, name:"olvi")
-      b3 = FactoryGirl.create(:brewery, name:"karjala")
-
-      create_beers_with_ratings_and_brewery(20, 20, user, b1)
-      create_beers_with_ratings_and_brewery(20, 30, user, b2)
-      create_beers_with_ratings_and_brewery(20, 10, user, b3)
-
-      expect(user.favorite_brewery).to eq(b2)
-    end
-
-  end
-
+  end  
 end # describe User
-def create_beers_with_ratings_and_brewery(*scores, user, brewery)
-  scores.each do |score|
-    create_beer_with_rating_and_brewery score, user, brewery
-  end
-end
-
-def create_beer_with_rating_and_brewery(score, user, brewery)
-  beer = FactoryGirl.create(:beer, brewery: brewery)
-  FactoryGirl.create(:rating, score:score, beer:beer, user:user)
-  beer
-end
 
 def create_beers_with_ratings_and_style(*scores, user, style)
   scores.each do |score|
