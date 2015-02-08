@@ -1,9 +1,15 @@
 require 'rails_helper'
 
 describe "Beer" do 
+  before :each do 
+      FactoryGirl.create :user
+  end
+
   let!(:brewery) { FactoryGirl.create :brewery, name:"Koff" }
 
   it "can be created with valid name" do
+    sign_in(username:"Pekka", password:"Foobar1")
+
   	visit new_beer_path
   	fill_in('beer[name]', with: 'ISO')
 
@@ -16,6 +22,7 @@ describe "Beer" do
 
 
   it "cannot use invalid name" do
+    sign_in(username:"Pekka", password:"Foobar1")
   	visit new_beer_path
   	fill_in('beer[name]', with:'')
   	click_button('Create Beer')
