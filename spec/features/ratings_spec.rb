@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-include OwnTestHelper
-
 describe "Rating" do
   let!(:brewery) { FactoryGirl.create :brewery, name:"Koff" }
   let!(:beer1) { FactoryGirl.create :beer, name:"iso 3", brewery:brewery }
@@ -9,7 +7,7 @@ describe "Rating" do
   let!(:user) { FactoryGirl.create :user }
 
   before :each do
-  sign_in(username:"Pekka", password:"Foobar1")
+    sign_in(username:"Pekka", password:"Foobar1")
   end
 
   it "when given, is registered to the beer and user who is signed in" do
@@ -18,7 +16,7 @@ describe "Rating" do
     fill_in('rating[score]', with:'15')
 
     expect{
-      click_button "Create Rating"
+    click_button('Create Rating')
     }.to change{Rating.count}.from(0).to(1)
 
     expect(user.ratings.count).to eq(1)
@@ -36,7 +34,7 @@ describe "Rating" do
     visit ratings_path
     expect(page).to have_content('Number of ratings: 2')
     expect(page).to have_content('iso 3')
-    expect(page).to have_content('Karhu')x
+    expect(page).to have_content('Karhu')
   end
 
   it "is removed when deleted" do
@@ -46,8 +44,7 @@ describe "Rating" do
     expect(page).to have_content('iso 3')
     expect(Rating.count).to eq(1)
     expect{
-      click_button "Delete"
+    click_button('Delete')
     }.to change{Rating.count}.from(1).to(0)
   end
-  
 end

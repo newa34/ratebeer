@@ -1,4 +1,4 @@
-require 'rail_helpers'
+require 'rails_helper'
 
 describe "Beer" do 
   let!(:brewery) { FactoryGirl.create :brewery, name:"Koff" }
