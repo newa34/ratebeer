@@ -1,1 +1,0 @@
-http://ratebeer-15.herokuapp.com/breweries
