@@ -11,6 +11,4 @@ class Brewery < ActiveRecord::Base
 			errors.add(:year, "Year cannot be Future ")
 		end
 	end
-
 end
-

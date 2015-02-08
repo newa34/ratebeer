@@ -68,12 +68,6 @@ describe "User" do
     end
   end
 
-  describe "this is testing nothing" do
-    it "get controllers to show up in the codecoverage report" do
-      MembershipsController.blank?
-      BeerClubsController.blank?
-    end
-  end
 end
 
 def create_beers_and_ratings
@@ -89,3 +83,9 @@ def create_beers_and_ratings
   FactoryGirl.create :rating, beer:beer2, user:user1
   FactoryGirl.create :rating, beer:beer3, user:user2
 end
+
+BeerClub
+BeerClubsController
+
+Memberships
+MembershipsController
