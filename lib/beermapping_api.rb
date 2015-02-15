@@ -25,7 +25,7 @@ class BeermappingApi
   def self.fetch_place(id)
     url = "http://beermapping.com/webservice/locquery/#{key}/"
     response = HTTParty.get "#{url}#{ERB::Util.url_encode(id)}"
-    places = response.parsed_response["bmp_locations"]["location"]
+    place = response.parsed_response["bmp_locations"]["location"]
   end
 
   def self.key
