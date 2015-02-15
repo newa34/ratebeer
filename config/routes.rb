@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'signout', to: 'sessions#destroy'
   get 'signin', to: 'sessions#new'
 
+  get 'places', to: 'places#index'
   resources :beers
   resources :breweries
 
