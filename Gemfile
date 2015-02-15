@@ -60,6 +60,7 @@ end
 ruby '2.2.0'
 
 group :test do
+  gem 'webmock'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
