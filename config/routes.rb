@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   
   resources :users
   get 'signup', to: 'users#new'
-  get 'signout', to: 'sessions#destroy'
   get 'signin', to: 'sessions#new'
+  delete 'signout', to: 'sessions#destroy'
 
   resources :places, only:[:index, :show]
   #get 'places', to: 'places#index'
