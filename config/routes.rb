@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
 
   get 'places', to: 'places#index'
+  post 'places', to: 'places#search'
+
   resources :beers
   resources :breweries
 
