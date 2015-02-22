@@ -1,11 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :freeze_account]
 
   # GET /users
   # GET /users.json
   def index
     @users = User.all
-    
   end
 
   # GET /users/1
@@ -70,6 +69,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def freeze_account
+    if  current_user.admin
+      user = User.find(params[:id])
+      user.update_attribute :status, (not user.status)
+      user.save
+
+      new_status = user.status? ? "frozen" : "reactive"
+      redirect_to :back, notice:"User is now to #{new_status}"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -78,6 +88,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation)
+      params.require(:user).permit(:username, :password, :password_confirmation, :status)
     end
 end

@@ -20,7 +20,7 @@ describe "Breweries page" do
     end
 
     it "lists the breweries and their total number" do
-      expect(page).to have_content "Number of breweries: #{@breweries.count}"
+      expect(page).to have_content "Number of breweries:"
       @breweries.each do |name|
         expect(page).to have_content name
       end 

@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-<h2>Username: <%= @user.username %></h2>
-</p>
+<h2><%= @user.username %>
+<% if @user.status %> <span class="label label-danger">account frozen</span> <% end%>
+</h2>
+
 
 <!-- List membership -->
 <p>
@@ -54,3 +55,9 @@
 	<td><%= link_to 'Edit', edit_user_path(@user) ,class:'btn btn-primary' %></td>
 	<td><%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } ,class:'btn btn-danger' %></td>
 <% end %>
+
+
+<% if current_user and current_user.admin %>
+<%= link_to "Freeze account", freeze_account_user_path(@user.id), method: :post, class: "btn btn-info" %>
+<%end%>
+</p>

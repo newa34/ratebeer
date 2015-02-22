@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   resources :memberships
   resources :beer_clubs
   
-  resources :users
+  resources :users do
+    post 'freeze_account', on: :member
+  end
+  
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
@@ -17,7 +20,7 @@ Rails.application.routes.draw do
   resources :breweries do
     post 'toggle_activity', on: :member
   end
-  
+
 
  # Breweries to default home  page
   root 'breweries#index'

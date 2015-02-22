@@ -5,7 +5,9 @@ class SessionsController <ApplicationController
 	def create
 		#username for the database
 		user = User.find_by username: params[:username]
-		if user && user.authenticate(params[:password])
+		if user.status
+			redirect_to :back, notice: "Your account is frozen, contact administration !!"
+		elsif user && user.authenticate(params[:password])
 			session[:user_id] = user.id
 			redirect_to user, notice: "Welcome #{params[:username]} !"
 		else
