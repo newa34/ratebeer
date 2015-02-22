@@ -2,7 +2,7 @@
 
 <p>
   <strong>Style:</strong>
-  <%= @beer.style %>
+  <%= link_to @beer.style, @beer %>
 </p>
 
 <% if @beer.ratings.empty? %>
