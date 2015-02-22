@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   post 'places', to: 'places#search'
 
   resources :beers
-  resources :breweries
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
+  
 
  # Breweries to default home  page
   root 'breweries#index'

@@ -6,6 +6,8 @@ class BreweriesController < ApplicationController
   # GET /breweries.json
   def index
     @breweries = Brewery.all
+    @active_breweries = Brewery.where(active:true)
+    @retired_breweries = Brewery.where(active:[nil, false])
    #render :panimot
   end
 
@@ -63,6 +65,16 @@ class BreweriesController < ApplicationController
     end
   end
 
+  def toggle_activity
+    brewery = Brewery.find(params[:id])
+    brewery.update_attribute :active, (not brewery.active)
+
+    new_status = brewery.active? ? "active" : "retired"
+
+    redirect_to :back, notice:"brewery activity status changed to #{new_status}"
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_brewery
@@ -71,7 +83,7 @@ class BreweriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def brewery_params
-      params.require(:brewery).permit(:name, :year)
+      params.require(:brewery).permit(:name, :year, :active)
     end
 
     def authenticate

@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   validates :password, length: { minimum: 4 }
 
-  validates :password, format: { with: /\d.*[A-Z]|[A-Z].*\d/,  message: "has to contain one number and one upper case letter" }
+  validates :password, format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{4,}\z/,  message: "has to contain one number and one upper case letter" }
 
   def favorite_beer
     return nil if ratings.empty?
@@ -62,5 +62,9 @@ class User < ActiveRecord::Base
       r.beer.style == style
     end
     ratings_of_style.map(&:score).sum / ratings_of_style.count
+  end
+
+  def self.top(n)
+    User.all.sort_by{ |u| -(u.ratings.count || 0) }.take(n)
   end
 end
