@@ -1,15 +1,8 @@
-<p id="notice"><%= notice %></p>
+<h2><%= @place.name %></h2>
 
 <p>
-  <h1><%= @place["name"] %></h1>
-  <address>
-    <%= @place["street"] %><br>
-    <%= @place["zip"] %> <%= @place["city"] %>
-  </address>
+  <%= @place.street %>
+  <%= @place.city %>
 </p>
 
-<iframe
-   width="640"
-   height="480"
-   src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBUwB8TpEZL0Phcr23pKx3jGkTJwslsrKU&q=<%= "#{@place["name"]},#{@place["street"]},#{@place["city"]}" %>">
-</iframe>
+<iframe src="<%= @place.blogmap %>"></iframe>
