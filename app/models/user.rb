@@ -69,4 +69,6 @@ class User < ActiveRecord::Base
   def self.top(n)
     User.all.sort_by{ |u| -(u.ratings.count || 0) }.take(n)
   end
+
+  
 end
