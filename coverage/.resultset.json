@@ -247,8 +247,8 @@
         1,
         null,
         1,
-        119,
-        79,
+        116,
+        76,
         null,
         null,
         1,
@@ -405,11 +405,13 @@
       "/home/newa/Project/ratebeer/app/models/style.rb": [
         1,
         1,
+        null,
         1,
         1,
         null,
+        null,
         1,
-        5,
+        6,
         null,
         null,
         1,
@@ -560,7 +562,7 @@
         null,
         null,
         1,
-        0,
+        1,
         null,
         null,
         null,
@@ -589,11 +591,11 @@
         null,
         2,
         2,
-        0,
-        0,
-        null,
-        4,
         2,
+        1,
+        null,
+        2,
+        1,
         null,
         null,
         null,
@@ -843,6 +845,6 @@
         null
       ]
     },
-    "timestamp": 1425212888
+    "timestamp": 1425217768
   }
 }

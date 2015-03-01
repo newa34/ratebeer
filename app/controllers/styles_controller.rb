@@ -11,7 +11,6 @@ class StylesController < ApplicationController
   # GET /styles/1
   # GET /styles/1.json
   def show
-     @style = Style.find(params[:id])
   end
 
   # GET /styles/new

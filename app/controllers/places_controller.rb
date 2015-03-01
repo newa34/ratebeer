@@ -3,6 +3,7 @@ class PlacesController < ApplicationController
   end
 
   def search
+    byebug
     @places = BeermappingApi.places_in(params[:city])
     if @places.nil? or @places.empty?
       redirect_to places_path, notice: "No locations in #{params[:city]}"
