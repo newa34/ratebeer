@@ -1,7 +1,6 @@
 class BeerClubsController < ApplicationController
   before_action :set_beer_club, only: [:show, :edit, :update, :destroy]
   before_action :ensure_that_signed_in, except: [:index, :show]
-  before_action :ensure_that_admin, except: [:index, :show, :new]
 
   # GET /beer_clubs
   # GET /beer_clubs.json
@@ -12,21 +11,18 @@ class BeerClubsController < ApplicationController
   # GET /beer_clubs/1
   # GET /beer_clubs/1.json
   def show
-    if @beer_club.members.include? current_user
-      @membership = @beer_club.memberships.find_by user_id:current_user.id
-    else
-      @membership = Membership.new
-      @membership.beer_club = @beer_club
-    end
+    @users = User.all
+    @membership = Membership.new
+    @membership.user_id = current_user.id
+    @membership.beer_club_id = @beer_club.id
+    @membership.confirm = false
+
   end
 
   def toggle_confirm
-    membership = Membership.find_by(params[:id])
-    brewery.update_attribute :confirm, (not brewery.active)
-
-    new_status = brewery.active? ? "active" : "retired"
-
-    redirect_to :back, notice:"brewery activity status changed to #{new_status}"
+    membership = Membership.find_by(user_id: params[:user_id], beer_club_id: params[:beer_club_id])
+    membership.update_attribute :confirm, true
+    redirect_to :back, notice:"Membership confirmed"
   end
 
 
@@ -49,6 +45,12 @@ class BeerClubsController < ApplicationController
       if @beer_club.save
         format.html { redirect_to @beer_club, notice: 'Beer club was successfully created.' }
         format.json { render :show, status: :created, location: @beer_club }
+        membership = Membership.new
+        membership.user_id = current_user.id
+        membership.beer_club_id = @beer_club.id
+        membership.confirm = true
+        membership.save
+
       else
         format.html { render :new }
         format.json { render json: @beer_club.errors, status: :unprocessable_entity }

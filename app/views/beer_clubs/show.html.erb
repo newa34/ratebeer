@@ -10,14 +10,34 @@
 
 <h2>Members</h2>
 <ul>
-  <% @beer_club.members.each do |member| %>
-    <li>
-      <%= link_to member.username, member %>
-    </li>
+  <% @beer_club.memberships.each do |membership| %>
+    <% user = @users.find_by id: membership.user_id %>
+    <% if @beer_club.isMemberAndConfirmed(user) %>
+      <li>
+        <%= link_to user.username, user_path(user) %>
+      </li>
+    <% end %>
   <% end %>
 </ul>
 
-<% if @beer_club
+<% if @beer_club.isMemberAndConfirmed(current_user) %>
+<h2>Outstanding Applications</h2>
+<table class="table table-hover">
+  <thead>
+  <tbody>
+  <% @beer_club.memberships.each do |membership|  %>
+      <% user = @users.find_by id: membership.user_id %>
+      <%if !@beer_club.isMemberAndConfirmed(user) %>
+      <tr>
+        <td><%=user.username%></td>
+        <td><%= link_to 'Confirm membership' , toggle_confirmed_beer_club_path(:user_id => membership.user_id,:beer_club_id => membership.beer_club_id), method: :post, class:'btn btn-primary' %></td>
+      </tr>
+      <% end %>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
+
 
 
 <% if current_user %>

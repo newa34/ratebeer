@@ -10,12 +10,16 @@ class MembershipsController < ApplicationController
   # GET /memberships/1
   # GET /memberships/1.json
   def show
+    @beer_clubs = BeerClub.all
+    @user = current_user
   end
 
   # GET /memberships/new
   def new
-    @beer_clubs = BeerClub.all.reject{ |b| b.members.include? current_user}
+    @beer_clubs = BeerClub.all
     @membership = Membership.new
+    @user = current_user
+    
   end
 
   # GET /memberships/1/edit
@@ -25,8 +29,11 @@ class MembershipsController < ApplicationController
   # POST /memberships
   # POST /memberships.json
   def create
+    @beer_clubs = BeerClub.all
+    @user = current_user
     @membership = Membership.new(membership_params)
-    @membership.user = current_user
+    @membership.user_id = current_user.id
+    @membership.confirm = false
 
     respond_to do |format|
       if @membership.save
@@ -57,9 +64,11 @@ class MembershipsController < ApplicationController
   # DELETE /memberships/1
   # DELETE /memberships/1.json
   def destroy
+    @beer_clubs = BeerClub.all
     @membership.destroy
     respond_to do |format|
-      format.html { redirect_to memberships_url, notice: 'Membership was successfully destroyed.' }
+      club = @beer_clubs.find_by id:@membership.beer_club_id
+      format.html { redirect_to user_path(current_user), notice: 'Membership in ended.' }
       format.json { head :no_content }
     end
   end
@@ -72,6 +81,6 @@ class MembershipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def membership_params
-      params.require(:membership).permit(:beer_club_id, :user_id)
+      params.require(:membership).permit(:beer_club_id, :user_id, :confirm)
     end
 end

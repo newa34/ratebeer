@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   resources :styles
 
   resources :memberships
-  resources :beer_clubs
+  resources :beer_clubs do
+    post 'toggle_confirm', on: :member
+  end
   
   resources :users do
     post 'freeze_account', on: :member
@@ -35,6 +37,9 @@ Rails.application.routes.draw do
   #session 
   resource :session, only: [:new, :create, :delete]
 
+
+  get 'auth/:provider/callback', to: 'sessions#create_oauth'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
