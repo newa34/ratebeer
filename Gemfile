@@ -41,9 +41,6 @@ gem 'jquery-turbolinks'
 #Miniprofiler
 gem 'rack-mini-profiler'
 
-#single sign on
-gem omniauth-github
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
 
