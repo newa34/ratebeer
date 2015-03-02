@@ -1,6 +1,7 @@
 class BeerClubsController < ApplicationController
   before_action :set_beer_club, only: [:show, :edit, :update, :destroy]
   before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_admin, except: [:index, :show, :new]
 
   # GET /beer_clubs
   # GET /beer_clubs.json
@@ -18,6 +19,17 @@ class BeerClubsController < ApplicationController
       @membership.beer_club = @beer_club
     end
   end
+
+  def toggle_confirm
+    membership = Membership.find_by(params[:id])
+    brewery.update_attribute :confirm, (not brewery.active)
+
+    new_status = brewery.active? ? "active" : "retired"
+
+    redirect_to :back, notice:"brewery activity status changed to #{new_status}"
+  end
+
+
 
   # GET /beer_clubs/new
   def new

@@ -26,13 +26,13 @@ describe "Rating" do
 
   it "ratings and the number displayed on ratings page" do
     visit ratings_path
-    expect(page).to have_content("Number of ratings: 0")
+    expect(page).to have_content("Total of 0 ratings given")
 
     FactoryGirl.create(:rating, beer:beer1, user:user)
     FactoryGirl.create(:rating, beer:beer2, user:user)
 
     visit ratings_path
-    expect(page).to have_content("Number of ratings: 2")
+    expect(page).to have_content("Total of 2 ratings given")
     expect(page).to have_content('iso 3')
     expect(page).to have_content('Karhu')
   end

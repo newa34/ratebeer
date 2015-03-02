@@ -21,14 +21,15 @@ Rails.application.routes.draw do
     post 'toggle_activity', on: :member
   end
 
-
  # Breweries to default home  page
   root 'breweries#index'
- 
- # Rating form
- #  get 'ratings/new', to: 'ratings#new'
- #  post 'ratings', to: 'ratings#create'
 
+ 
+  get 'beerlist', to: 'beers#list'
+  get 'ngbeerlist', to: 'beers#nglist'
+
+  get 'brewerylist', to: 'breweries#brewerylist'
+  
   resources :ratings, only: [:index, :new, :create, :destroy]
  
   #session 

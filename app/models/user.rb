@@ -16,7 +16,11 @@ class User < ActiveRecord::Base
   validates :password, format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{4,}\z/,  message: "has to contain one number and one upper case letter" }
 
 
-  
+  def self.most_active(n)
+    sorted_by_rating_in_desc_order = User.all.select{ |u| u.ratings.any? }.sort_by{ |u| -(u.ratings.count) }
+    sorted_by_rating_in_desc_order[0..(n-1)]
+  end
+
   def favorite_beer
     return nil if ratings.empty?
     ratings.order(score: :desc).limit(1).first.beer

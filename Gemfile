@@ -35,6 +35,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'httparty'
 gem 'bootstrap-sass'
 
+#jQuery
+gem 'jquery-turbolinks'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
 
@@ -69,4 +72,6 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov', require: false
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end

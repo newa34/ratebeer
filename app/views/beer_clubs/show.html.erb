@@ -8,6 +8,7 @@
   Founded in <%= @beer_club.founded %>
 </p>
 
+<h2>Members</h2>
 <ul>
   <% @beer_club.members.each do |member| %>
     <li>
@@ -15,6 +16,9 @@
     </li>
   <% end %>
 </ul>
+
+<% if @beer_club
+
 
 <% if current_user %>
   <% if @beer_club.members.include?(current_user) %>
