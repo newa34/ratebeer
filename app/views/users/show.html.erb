@@ -47,17 +47,15 @@
 <p>
 	<strong>Favorite brewery: </strong>
 
-	<%= link_to "#{@user.favorite_brewery.name }", @user.favorite_brewery %>
+	<%= link_to "#{@user.favorite_brewery.name}", @user.favorite_brewery %>
 </p>
 <% end %>
 
 <% if @user == current_user %>
 	<td><%= link_to 'Edit', edit_user_path(@user) ,class:'btn btn-primary' %></td>
 	<td><%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } ,class:'btn btn-danger' %></td>
+
+	<% elsif current_user.admin %>
+		<%= link_to "Freeze account", freeze_account_user_path(@user.id), method: :post, class: "btn btn-info" %>
 <% end %>
-
-
-<% if current_user and current_user.admin %>
-<%= link_to "Freeze account", freeze_account_user_path(@user.id), method: :post, class: "btn btn-info" %>
-<%end%>
 </p>

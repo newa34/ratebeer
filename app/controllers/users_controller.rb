@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       #only current user can modify itself
-      if user_params[:username].nil? and @user == current_user and @user.update(user_params)
+      if user_params[:username].nil? and @user == current_user and @user.update(user_params) and @user == current_user.admin
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
